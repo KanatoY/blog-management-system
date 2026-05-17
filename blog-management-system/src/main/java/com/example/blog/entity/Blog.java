@@ -1,60 +1,76 @@
 package com.example.blog.entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-@Entity
-public class Blog {
-    
-    @Id
-    private int id;
-    private String title;
-    private String content;
-    private String created_at;
-    private String updated_at;
-    private String deleted_at;
 
+@Entity              /**エンティティクラスであることを示すアノテーション*/
+public class Blog {  /**ブログエンティティクラス*/
     
+    @Id                       /**エンティティの主キーを示すアノテーション*/
+    private int id;           /** ブログのID */
+    private String title;     /** ブログのタイトル */
+    private String content;   /** ブログの内容 */
+    private LocalDateTime createdAt;   /** 作成日時 */
+    private LocalDateTime updatedAt;   /** 更新日時 */
+    private LocalDateTime deletedAt;   /** 削除日時 */
+   
+    /** getter/setterメソッド */
+
+    /** ブログのIDを取得する */
     public int getId(){
         return id;
     }
+    /** ブログのIDを設定する */
     public void setId(int id){
         this.id = id;
     }
-
+    
+    /** ブログのタイトルを取得する */
     public String getTitle(){
         return title;
     }
+    /** ブログのタイトルを設定する */
     public void setTitle(String title){
         this.title = title;
     }
 
+    /** ブログの内容を取得する */
     public String getContent(){
         return content;
     }
+    /** ブログの内容を設定する */
     public void setContent(String content){
         this.content = content;
     }
 
-    public String getCreated_at(){
-        return created_at;
+    /** 作成日時を取得する */
+    public LocalDateTime getCreatedAt(){
+        return createdAt;
     }
-    public void setCreated_at(String created_at){
-        this.created_at = created_at;
-    }
-
-    public String getUpdated_at(){
-        return updated_at;
-    }
-    public void setUpdated_at(String updated_at){
-        this.updated_at = updated_at;
+    /** 作成日時を設定する */
+    public void setCreatedAt(LocalDateTime createdAt){
+        this.createdAt = createdAt;
     }
 
-    public String getDeleted_at(){
-        return deleted_at;
+    /** 更新日時を取得する */
+    public LocalDateTime getUpdatedAt(){
+        return updatedAt;
     }
-    public void setDeleted_at(String deleted_at){
-        this.deleted_at = deleted_at;
+    /** 更新日時を設定する */
+    public void setUpdatedAt(LocalDateTime updatedAt){
+        this.updatedAt = updatedAt;
+    }
+
+    /** 削除日時を取得する */
+    public LocalDateTime getDeletedAt(){
+        return deletedAt;
+    }
+    /** 削除日時を設定する */
+    public void setDeletedAt(LocalDateTime deletedAt){
+        this.deletedAt = deletedAt;
     }
 
 
