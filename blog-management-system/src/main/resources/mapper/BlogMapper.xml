@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.blog.repository.BlogMapper">
+
+    /*全てのブログ記事を取得するクエリ。削除されていない記事のみを取得し、IDの降順で並べる*/
+    <select id="findAll" resultType="com.example.blog.entity.Blog"> 
+        SELECT                       /*取得する列を指定する*/
+            id,                      
+            title, 
+            content, 
+            created_at AS createdAt, /*created_atをcreatedAtとしてマッピングする*/
+            updated_at AS updatedAt, /*updated_atをupdatedAtとしてマッピングする*/
+            deleted_at AS deletedAt  /*deleted_atをdeletedAtとしてマッピングする*/
+        FROM 
+            blogs                    /*blogsテーブルからデータを取得する*/
+        WHERE  
+            deleted_at IS NULL       /*deleted_atがNULLの行のみを取得する（論理削除された記事を除外する）*/
+        ORDER BY 
+            id DESC                  /*IDの降順で結果を並べる*/
+    </select>
+
+    /*IDを指定してブログ記事を取得するクエリ。削除されていない記事のみを対象とする*/
+    <select id="findById" parameterType="int" resultType="com.example.blog.entity.Blog">
+        SELECT                        
+            id, 
+            title, 
+            content, 
+            created_at AS createdAt, 
+            updated_at AS updatedAt, 
+            deleted_at AS deletedAt
+         FROM 
+            blogs                   
+         WHERE 
+            id = #{id}               /*IDが指定された値と一致する行を取得する*/
+            AND deleted_at IS NULL   /*deleted_atがNULLの行のみを取得する（論理削除された記事を除外する）*/
+    </select>
+
+    /*新しいブログ記事を保存するクエリ。タイトルと内容を挿入し、作成日時と更新日時は現在時刻に設定する*/
+    <insert id="save" parameterType="com.example.blog.entity.Blog">
+        INSERT INTO blogs (  
+            title, 
+            content, 
+            created_at, 
+            updated_at
+        ) VALUES (              /*挿入する値を指定する*/
+            #{title},           
+            #{content}, 
+            CURRENT_TIMESTAMP,  /*作成日時を現在時刻に設定する*/
+            CURRENT_TIMESTAMP   /*更新日時を現在時刻に設定する*/  
+        )
+    </insert>
+
+    /*既存のブログ記事を更新するクエリ。タイトルと内容を更新し、更新日時は現在時刻に設定する。IDと削除されていないことを条件とする*/
+    <update id="update" parameterType="com.example.blog.entity.Blog">
+        UPDATE blogs
+        SET                                 /*更新する列を指定する*/
+            title = #{title},               /*タイトルを指定された値に更新する*/
+            content = #{content},           /*内容を指定された値に更新する*/
+            updated_at = CURRENT_TIMESTAMP  /*更新日時を現在時刻に設定する*/
+        WHERE
+            id = #{id}
+            AND deleted_at IS NULL  
+    </update>
+
+    /*ブログ記事を論理削除するクエリ。削除日時を現在時刻に設定し、IDと削除されていないことを条件とする*/
+    <update id="delete" parameterType="int">
+        UPDATE blogs                         /*更新するテーブルを指定する*/
+        SET
+            deleted_at = CURRENT_TIMESTAMP   /*削除日時を現在時刻に設定する*/
+        WHERE
+            id = #{id}
+    </update>
+
+</mapper>
