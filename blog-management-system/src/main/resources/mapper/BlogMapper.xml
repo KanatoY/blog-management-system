@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.blog.repository.BlogMapper">
 
+    
     /*全てのブログ記事を取得するクエリ。削除されていない記事のみを取得し、IDの降順で並べる*/
     <select id="findAll" resultType="com.example.blog.entity.Blog"> 
         SELECT                       /*取得する列を指定する*/

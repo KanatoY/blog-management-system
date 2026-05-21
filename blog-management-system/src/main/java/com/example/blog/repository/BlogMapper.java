@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.example.blog.entity.Blog;
 
+
 @Mapper                     /**MyBatisのMapperインターフェースであることを示すアノテーション*/
 public interface BlogMapper /**ブログのデータアクセスを定義するインターフェース*/
 {  
