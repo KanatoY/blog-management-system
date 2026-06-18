@@ -31,12 +31,13 @@ public class BlogController {  /** ブログのコントローラークラス */
     }
 
     @GetMapping("/new")                                       /** HTTP GETリクエストを処理するメソッドであることを示すアノテーション */
-    public String create(@ModelAttribute BlogForm blogForm) { /** ブログの作成フォームを表示するメソッド */
+    public String newForm(@ModelAttribute BlogForm blogForm, Model model) { /** ブログの作成フォームを表示するメソッド */
+        model.addAttribute("blog", new Blog());             /** モデルにブログの作成フォームを追加する */
         return "blog/form";                                   /** ブログの作成フォームを表示するビューの名前を返す */
     }
 
     @PostMapping                      
-    public String save(@ModelAttribute BlogForm blogForm) { /** ブログの作成フォームから送信されたデータを保存するメソッド */
+    public String create(@ModelAttribute BlogForm blogForm) { /** ブログの作成フォームから送信されたデータを保存するメソッド */
         blogService.create(blogForm);                       /** ブログの作成フォームから送信されたデータを保存する */
         return "redirect:/blogs";                           /** ブログの一覧ページにリダイレクトする */
     }
