@@ -31,8 +31,8 @@ public class BlogController {  /** ブログのコントローラークラス */
     }
 
     @GetMapping("/new")                                       /** HTTP GETリクエストを処理するメソッドであることを示すアノテーション */
-    public String newForm(@ModelAttribute BlogForm blogForm, Model model) { /** ブログの作成フォームを表示するメソッド */
-        model.addAttribute("blog", new Blog());             /** モデルにブログの作成フォームを追加する */
+    public String newForm(Model model) {                      /** ブログの作成フォームを表示するメソッド */
+        model.addAttribute("blog", new Blog()); /** モデルにブログの作成フォームを追加する */
         return "blog/form";                                   /** ブログの作成フォームを表示するビューの名前を返す */
     }
 
