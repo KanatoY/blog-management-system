@@ -24,7 +24,14 @@ public class BlogService { /* ブログのビジネスロジックを担当す�
         blogMapper.save(blog);
     }
 
-    public Blog detail(int id) {         /* ブログの詳細情報を取得するメソッド */
+    public Blog detail(Integer id) {         /* ブログの詳細情報を取得するメソッド */
         return blogMapper.findById(id);  /* ブログの詳細情報を取得する */
     }
+
+    public void update(Integer id, BlogForm blogForm) {  /* ブログを更新するメソッド */
+        Blog blog = blogMapper.findById(id);         /* 更新するブログの詳細情報を取得する */
+        blog.setTitle(blogForm.getTitle());          /* ブログのタイトルを更新する */
+        blog.setContent(blogForm.getContent());      /* ブログの内容を更新する */
+        blogMapper.update(blog);                     /* ブログの更新を保存する */
+    } 
 }
