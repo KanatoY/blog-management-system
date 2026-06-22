@@ -3,7 +3,8 @@ package com.example.blog.form;
 public class BlogForm {       // ブログのフォームクラス
 
     private String title;     // ブログのタイトル
-    private String content;   // ブログの内容     
+    private String content;   // ブログの内容    
+    private Integer id;      // ブログのID 
 
     public String getTitle() {               // ブログのタイトルを取得する */
         return title;
@@ -19,6 +20,14 @@ public class BlogForm {       // ブログのフォームクラス
 
     public void setContent(String content) { // ブログの内容を設定する */
         this.content = content;  
+    }
+
+    public Integer getId() {                 // ブログのIDを取得する */
+        return id;
+    }
+
+    public void setId(Integer id) {          // ブログのIDを設定する */
+        this.id = id;
     }
 
 }
