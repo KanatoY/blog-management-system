@@ -48,4 +48,27 @@ public class BlogController {  /** ブログのコントローラークラス */
         model.addAttribute("blog", blog);       /** モデルにブログの詳細情報を追加する */
         return "blog/detail";                                 /** ブログの詳細情報を表示するビューの名前を返す */
     }
+
+    @GetMapping("/{id}/edit")
+public String editForm(@PathVariable int id, Model model) {
+    Blog blog = blogService.detail(id);
+
+    BlogForm blogForm = new BlogForm();
+    blogForm.setTitle(blog.getTitle());
+    blogForm.setContent(blog.getContent());
+    blogForm.setId(blog.getId());
+
+    model.addAttribute("id", id);
+    model.addAttribute("blog", blogForm);
+
+    return "blog/form";
+}
+
+@PostMapping("/{id}")
+public String update(@PathVariable int id, @ModelAttribute BlogForm blogForm, Model model) {
+    blogService.update(id, blogForm);
+    List<Blog> blogs = blogService.list();
+    model.addAttribute("blogs", blogs);
+    return "blog/list";
+}
 }
