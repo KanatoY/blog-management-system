@@ -50,25 +50,20 @@ public class BlogController {  /** ブログのコントローラークラス */
     }
 
     @GetMapping("/{id}/edit")
-public String editForm(@PathVariable int id, Model model) {
-    Blog blog = blogService.detail(id);
+    public String editForm(@PathVariable int id, Model model) {
+        Blog blog = blogService.detail(id);
+        BlogForm blogForm = new BlogForm();
+        blogForm.setTitle(blog.getTitle());
+        blogForm.setContent(blog.getContent());
+        blogForm.setId(blog.getId());
+        model.addAttribute("id", id);
+        model.addAttribute("blogForm", blogForm);
+        return "blog/form";
+    }
 
-    BlogForm blogForm = new BlogForm();
-    blogForm.setTitle(blog.getTitle());
-    blogForm.setContent(blog.getContent());
-    blogForm.setId(blog.getId());
-
-    model.addAttribute("id", id);
-    model.addAttribute("blog", blogForm);
-
-    return "blog/form";
-}
-
-@PostMapping("/{id}")
-public String update(@PathVariable int id, @ModelAttribute BlogForm blogForm, Model model) {
-    blogService.update(id, blogForm);
-    List<Blog> blogs = blogService.list();
-    model.addAttribute("blogs", blogs);
-    return "blog/list";
-}
+    @PostMapping("/{id}")
+    public String update(@PathVariable int id, @ModelAttribute BlogForm blogForm, Model model) {
+        blogService.update(id, blogForm);
+        return "redirect:/blogs";
+    }
 }
