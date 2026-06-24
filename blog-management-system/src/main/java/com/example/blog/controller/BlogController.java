@@ -56,13 +56,12 @@ public class BlogController {  /** ブログのコントローラークラス */
         blogForm.setTitle(blog.getTitle());
         blogForm.setContent(blog.getContent());
         blogForm.setId(blog.getId());
-        model.addAttribute("id", id);
         model.addAttribute("blogForm", blogForm);
         return "blog/form";
     }
 
     @PostMapping("/{id}")
-    public String update(@PathVariable int id, @ModelAttribute BlogForm blogForm, Model model) {
+    public String update(@PathVariable int id, @ModelAttribute BlogForm blogForm) {
         blogService.update(id, blogForm);
         return "redirect:/blogs";
     }
