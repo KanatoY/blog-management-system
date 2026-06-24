@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 public class Blog {  /**ブログエンティティクラス*/
     
     @Id                       /**エンティティの主キーを示すアノテーション*/
-    private int id;           /** ブログのID */
+    private Integer id;           /** ブログのID */
     private String title;     /** ブログのタイトル */
     private String content;   /** ブログの内容 */
     private LocalDateTime createdAt;   /** 作成日時 */
@@ -20,11 +20,11 @@ public class Blog {  /**ブログエンティティクラス*/
     /** getter/setterメソッド */
 
     /** ブログのIDを取得する */
-    public int getId(){
+    public Integer getId(){
         return id;
     }
     /** ブログのIDを設定する */
-    public void setId(int id){
+    public void setId(Integer id){
         this.id = id;
     }
     
