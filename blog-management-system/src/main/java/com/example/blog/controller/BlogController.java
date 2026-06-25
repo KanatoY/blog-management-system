@@ -50,19 +50,25 @@ public class BlogController {  /** ブログのコントローラークラス */
     }
 
     @GetMapping("/{id}/edit")
-    public String editForm(@PathVariable int id, Model model) {
-        Blog blog = blogService.detail(id);
-        BlogForm blogForm = new BlogForm();
-        blogForm.setTitle(blog.getTitle());
-        blogForm.setContent(blog.getContent());
-        blogForm.setId(blog.getId());
-        model.addAttribute("blogForm", blogForm);
+    public String editForm(@PathVariable int id, Model model) {  /** ブログの編集フォームを表示するメソッド */
+        Blog blog = blogService.detail(id);                      /** ブログの詳細情報を取得する */
+        BlogForm blogForm = new BlogForm();                      /** ブログの編集フォームを作成する */
+        blogForm.setTitle(blog.getTitle());                      /** ブログのタイトルを編集フォームに設定する */
+        blogForm.setContent(blog.getContent());                  /** ブログの内容を編集フォームに設定する */ 
+        blogForm.setId(blog.getId());                            /** ブログのIDを編集フォームに設定する */
+        model.addAttribute("blog", blogForm);     /** モデルにブログの編集フォームを追加する */ 
         return "blog/form";
     }
 
-    @PostMapping("/{id}")
-    public String update(@PathVariable int id, @ModelAttribute BlogForm blogForm) {
-        blogService.update(id, blogForm);
-        return "redirect:/blogs";
+    @PostMapping("/{id}")                                                            
+    public String update(@PathVariable int id, @ModelAttribute BlogForm blogForm) {  /** ブログの編集フォームから送信されたデータを更新するメソッド */
+        blogService.update(id, blogForm);                                            /** ブログの編集フォームから送信されたデータを更新する */
+        return "redirect:/blogs";                                                    /** ブログの一覧ページにリダイレクトする */
+    }
+
+    @PostMapping("/{id}/delete")                   /** HTTP POSTリクエストを処理するメソッドであることを示すアノテーション */
+    public String delete(@PathVariable int id) {   /** ブログを削除するメソッド */
+        blogService.delete(id);                    /** ブログを削除する */
+        return "redirect:/blogs";                  /** ブログの一覧ページにリダイレクトする */
     }
 }
