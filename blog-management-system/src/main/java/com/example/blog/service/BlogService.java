@@ -2,6 +2,7 @@ package com.example.blog.service;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
+
 import com.example.blog.entity.Blog;
 import com.example.blog.form.BlogForm;
 import com.example.blog.repository.BlogMapper;
@@ -34,4 +35,8 @@ public class BlogService { /* ブログのビジネスロジックを担当す�
         blog.setContent(blogForm.getContent());      /* ブログの内容を更新する */
         blogMapper.update(blog);                     /* ブログの更新を保存する */
     } 
+    public void delete(Integer id) {  /* ブログを削除するメソッド */
+        blogMapper.delete(id);    /* ブログの削除を保存する */
+    }
+
 }
