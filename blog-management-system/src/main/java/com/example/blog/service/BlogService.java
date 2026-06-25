@@ -34,4 +34,9 @@ public class BlogService { /* ブログのビジネスロジックを担当す�
         blog.setContent(blogForm.getContent());      /* ブログの内容を更新する */
         blogMapper.update(blog);                     /* ブログの更新を保存する */
     } 
+
+    public void delete(Integer id) {   /* ブログを削除するメソッド */
+        blogMapper.delete(id);         /* ブログの削除を保存する */
+    }
+
 }
